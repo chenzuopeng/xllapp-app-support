@@ -1,0 +1,39 @@
+<assembly>
+	<id>bundle</id>
+	<!-- 设置打包类型 -->
+	<formats>
+		<format>tar</format>
+	</formats>
+	<dependencySets>
+	    <!-- 添加项目依赖到lib目录,但是排除icity-app-launcher.jar包 -->
+		<dependencySet>
+			<outputDirectory>lib</outputDirectory>
+			<outputFileNameMapping>
+				${artifact.artifactId}-${artifact.version}.${artifact.extension}
+			</outputFileNameMapping>
+			<excludes>
+				<exclude>org.xllapp:xllapp-app-launcher</exclude>
+			</excludes>
+		</dependencySet>
+		 <!-- 将xllapp-app-launcher.jar包添加到根目录并重命名为launcher.jar -->
+		<dependencySet>
+			<outputDirectory>/</outputDirectory>
+			<outputFileNameMapping>launcher.jar</outputFileNameMapping>
+			<includes>
+				<include>org.xllapp:xllapp-app-launcher</include>
+			</includes>
+		</dependencySet>
+	</dependencySets>
+	<fileSets>
+	     <!-- 添加工程配置文件到conf目录 -->
+		<fileSet>
+			<directory>src/main/resources</directory>
+			<outputDirectory>/conf</outputDirectory>
+		</fileSet>
+		<!-- 添加启停脚本到根目录 -->
+		<fileSet>
+			<directory>target/scripts</directory>
+			<outputDirectory>/</outputDirectory>
+		</fileSet>
+	</fileSets>
+</assembly>
